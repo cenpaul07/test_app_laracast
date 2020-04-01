@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -107,15 +111,16 @@ Route::get('about', function (){
 
 Route::get('article/create', 'ArticleController@create');//display the form
 
-Route::post('article/','ArticleController@store');//saves the form
+Route::post('article/','ArticleController@store')->name('article.store');//saves the form
 
-Route::get('article/{id}','ArticleController@show');
+//Route::get('article/{id}','ArticleController@show');
+Route::get('article/{article}','ArticleController@show')->name('article.show');
 
-Route::get('article/','ArticleController@index');
+Route::get('article/','ArticleController@index')->name('article.index');
 
-Route::get('article/{id}/edit','ArticleController@edit');
+Route::get('article/{article}/edit','ArticleController@edit');
 
-Route::put('article/{id}/','ArticleController@update');
+Route::put('article/{article}/','ArticleController@update')->name('article.update');
 
 
 
@@ -145,21 +150,4 @@ Route::put('article/{id}/','ArticleController@update');
 // subscribing means creating a subscription
 
 // 1. POST /articles/subscriptions
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

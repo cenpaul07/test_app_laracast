@@ -10,6 +10,11 @@
                         <span class="byline">{{$current_article->excerpt}}</span> </div>
                     <p><img src="/images/banner.jpg" alt="" class="image image-full" /> </p>
                     <p>{{$current_article->body}} </p>
+                    <br>
+                    @foreach($current_article->tags as $tag)
+                        <b><a href="{{route('article.index', ['tag'=>$tag->name])}}">{{$tag->name}}</a></b>
+{{--                        <b><a href="">{{$tag->name}}</a></b>--}}
+                    @endforeach
                 @else
                     <div class="title">
                         <h2>Not found!</h2>

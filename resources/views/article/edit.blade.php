@@ -11,14 +11,25 @@
         <div id="page" class="container">
             <div id="content">
                 <h2><b>Edit Article</b></h2>
-                <form method="post" action="/article/{{$article->id}}" name="article" class="contact-form" >
+                <form method="post" action="{{route('article.update',$article)}}" name="article" class="contact-form" >
+{{--                <form method="post" action="{{route('article.show',$article->id)}}" name="article" class="contact-form" >--}}
+{{--                <form method="post" action="/article/{{$article->id}}" name="article" class="contact-form" >--}}
                     @csrf
                     @method('put'){{--To submit put through browsers--}}
                     <div class="form-group">
-                        <input type="text" value="{{$article->title}}" class="form-control" id="name" name="title" placeholder="Title"  autofocus="">
+
+                        <input type="text"
+                               value="{{$article->title}}"
+                               class="form-control"
+                               id="name"
+                               name="title"
+                               placeholder="Title"
+                               autofocus="">
+
                         @if($errors->has('title')) {{--same as @error('title')...@enderror--}}
                         <p style="color:red">{{ $errors->first('title')}}</p>
                         @endif
+
                     </div>
                     <div class="form-group">
                         <input type="text"  value="{{$article->excerpt}}" name="excerpt" class="form-control" id="phone" placeholder="Excerpt" >
@@ -39,5 +50,4 @@
         </div>
     </div>
 
-{{--test--}}
 @endsection

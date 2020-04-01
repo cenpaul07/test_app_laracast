@@ -11,7 +11,7 @@
         <div id="page" class="container">
             <div id="content">
                 <h2><b>New Article</b></h2>
-                <form action="/article" name="article" class="contact-form" method="post">
+                <form action="{{route('article.store')}}" name="article" class="contact-form" method="post">
                     @csrf
                     <div class="form-group">
                         <input type="text" class="form-control"
@@ -37,9 +37,23 @@
                         @error('body')
                         <p style="color:red">{{ $errors->first('body')}}</p>
                         @enderror
+                    </div>
+                    <div class="control">
+
+                                <select multiple class="form-control" name="tags[]">{{--by using [] with name it will return as array--}}
+                                    @foreach($tags as $tag)
+                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                    @endforeach
+                                </select>
+
+                            @error('tags')
+                            <p style="color:red">{{ $message }}</p>
+                            @enderror
+                        <br>
                         <br>
                         <button type="submit" class="btn btn-default btn-send">  Save </button>
                     </div>
+
                 </form>
             </div>
         </div>
