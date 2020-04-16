@@ -21,6 +21,25 @@
 
             <div class="title m-b-md">
                 @yield('main_heading')
+                @if(Auth::check())
+                    {{Auth::user()->role->name}}
+                    and
+                    {{auth()->user()->name}}
+                @else
+                    GUEST
+                @endif
+
+                @auth
+                    Logged in
+                @else
+                    I'm GUEST
+                @endauth
+
+                @guest
+                    Welcome guest
+                @else
+                    Not Guest
+                @endguest
             </div>
 
             <div class="links">

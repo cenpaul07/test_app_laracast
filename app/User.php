@@ -48,5 +48,11 @@ class User extends \TCG\Voyager\Models\User
 
     }
 
+    public function routeNotificationForNexmo($notification)
+    {
+//        return $this->phone_number;
+        return '919747089045';
+    }
+
 
 }

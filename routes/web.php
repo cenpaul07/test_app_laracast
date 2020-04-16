@@ -1,6 +1,11 @@
 <?php
 
+use App\Container;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +17,50 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('facade','PagesController@facade');
+
+/////to resolve Binding Resolution Error
+//App()->bind('App\Example2',function (){ //this code mmoved to app/Providers/AppServiceProvider
+//    $collaborator = new \App\Collaborator();
+//    $foo='foobar';
+//    return new App\Example2($collaborator, $foo);
+//});
+
+
+Route::get('laraval-container-using-controller/','PagesController@home')
+    ->name('service_container_using_pages_controller');
+
+
+Route::get('container/', function(){
+
+    $container = new Container();
+    $container->bind('example', function (){
+        return new App\Example();
+    });
+    $example=$container->resolve('example');//to resolve an service in container
+//    ddd($example);//ddd = die dump and debug
+    $example->go();//calling the Example's go method using service resolved from the container
+});
+
+//Laravel's service container is App() itself
+
+//App()->bind('example2', function () {
+//    $foo=config('services.foo');
+//    return new App\Example2($foo);
+//});
+
+Route::get('laraval-container-explicitly-resolving-container/', function (){
+    $example = resolve(App\Example::class);// same as $example = App()->make(App\Example2::class);
+    ddd($example);
+});
+
+//without explicitly specifying
+Route::get('laraval-container-without-explicit-resolving/', function (\App\Example $example){
+    ddd($example);
+});
+
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
@@ -88,9 +137,16 @@ Route::get('eloquent/{blog_name}','DisplayBlogEloquent@display');
 
 Route::view('contact', 'contactus');
 
-Route::get('/welcome2/', function (){
+Route::get('/welcome2/', function (Filesystem $file){
 
-    return view('welcome2');
+    return View::make('welcome2');// same as return view('welcome2');
+});
+
+Route::get('/welcome3/', function (Filesystem $file){
+
+    return $file->get(public_path('index.php'));//same as File::get(public_path('index.php'));
+//      return Request::input('name');// same as return request('name');
+//    return View::make('welcome2');// same as return view('welcome2');
 
 });
 
@@ -122,8 +178,37 @@ Route::get('article/{article}/edit','ArticleController@edit');
 
 Route::put('article/{article}/','ArticleController@update')->name('article.update');
 
+Route::get('contact/','ContactController@create')->name('contact.create');
+Route::post('contact/','ContactController@store')->name('contact.store');
+
+Route::get('payments/','PaymentsController@create')->name('payment.create')
+    ->middleware('auth');
+Route::post('payments/','PaymentsController@store')->name('payment.store')
+    ->middleware('auth');
+
+Route::get('notifications/','NotificationController@show')->name('notification.show')
+    ->middleware('auth');
 
 
+
+
+//Route::get('/logout', function (){
+//    auth()->logout();
+//    return "You are now logged out!";
+//});//for csrf attack experiment
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home')->middleware('auth'); //alternative method
+
+Route::get('/conversations/','ConversationController@index')
+    ->name('conversation.index');
+Route::get('/conversations/{conversation}','ConversationController@show')
+    ->name('conversation.show');
+
+Route::post('/best-reply/{reply}','ReplyController@store')
+    ->name('reply.store');
 
 
 //REST-full Routing
@@ -150,4 +235,6 @@ Route::put('article/{article}/','ArticleController@update')->name('article.updat
 // subscribing means creating a subscription
 
 // 1. POST /articles/subscriptions
+
+
 

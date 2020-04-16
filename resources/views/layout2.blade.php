@@ -9,6 +9,7 @@
     <link href="/css/default.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
+
     @yield('head')
 
 </head>
@@ -25,7 +26,7 @@
                 <li class="{{Request::path()==='client' ? 'current_page_item' : '' }}" ><a href="#" accesskey="2" title="">Our Clients</a></li>
                 <li class="{{Request::is('about') ? 'current_page_item' : '' }}"><a href="/about" accesskey="3" title="">About Us</a></li>
                 <li class="{{Request::path()==='article' ? 'current_page_item' : '' }}"><a href="/article" accesskey="4" title="">Articles</a></li>
-                <li class="{{Request::path()==='contact' ? 'current_page_item' : '' }}"><a href="#" accesskey="5" title="">Contact Us</a></li>
+                <li class="{{Request::path()==='contact' ? 'current_page_item' : '' }}"><a href="{{route('contact.create')}}" accesskey="5" title="">Contact Us</a></li>
             </ul>
         </div>
     </div>

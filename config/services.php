@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'foo' => 'value',
+
+    'nexmo' => [
+        'sms_from' => '9747089045',
+    ],
+
 ];
