@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\View;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//auth()->loginUsingId('6'); // to login from code level
 
 Route::get('facade','PagesController@facade');
 
@@ -205,10 +206,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/conversations/','ConversationController@index')
     ->name('conversation.index');
 Route::get('/conversations/{conversation}','ConversationController@show')
-    ->name('conversation.show');
+    ->name('conversation.show')->middleware('can:view,conversation');
 
 Route::post('/best-reply/{reply}','ReplyController@store')
     ->name('reply.store');
+
+Route::get('/roles_and_abilities', 'RolesAbilitiesController@index')->name('role.index');
+Route::get('/roles_and_abilities/view', 'RolesAbilitiesController@show')
+    ->middleware('can:edit_file')->name('role.show');
 
 
 //REST-full Routing

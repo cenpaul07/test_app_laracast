@@ -28,6 +28,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        //for roles and abilities
+        Gate::before(function ($user,$ability){
+            //view_link is passed as $ability
+            return $user->abilities()->contains($ability);//checking view_link is in the abilities() of user
+        });
+
 //        Gate::before(function (User $user){
 //            if($user->role->id===1){
 //                return true;
