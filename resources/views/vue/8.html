@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+
+</head>
+
+<body style="padding-top: 40px">
+<div class="container">
+    <div id="root">
+
+        <modal v-if="is_visible" @close_now="is_visible=false">
+            <h1>This is awesome</h1>
+        </modal>
+
+        <button class="btn-danger" @click="makeVisible">Open Modal</button>
+
+    </div>
+</div>
+
+</body>
+
+<script src="/js/vue_main.js"></script>
+
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+
+<div id="root">
+    <input type="text" id="input" v-model="message">
+    <p>{{ message }}</p>
+    <ol>
+<!--     <li v-for="name in names">{{ name }}</li>-->
+        <li v-for="name in names" v-text="name"></li>
+    </ol>
+    <input type="text" id="new_item" placeholder="Add new item here">
+    <button id="add">Add</button>
+</div>
+<script>
+    var app = new Vue({
+        el: '#root',
+        data: {
+            'message' : "Hello World",
+            'names' : ['Jane', "cen", 'Amal', "Jacob"]
+        },
+        mounted(){
+            //executed once vue object is mounted or everything is ready to go
+
+            document.querySelector('#add').addEventListener('click',()=>{
+                let name = document.querySelector('#new_item');
+                app.names.push(name.value);
+                name.value = '';
+            });
+        }
+    });
+    // document.querySelector('#input').value=data.message2;
+</script>
+
+</body>
+</html>

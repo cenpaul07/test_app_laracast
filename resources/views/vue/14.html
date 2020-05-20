@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+</head>
+<body style="padding-top: 40px">
+<div class="container">
+
+    <div id="root">
+    <!--Inline Vue template component-->
+        <progress-view inline-template>
+            <div>
+                <p>Your Current Progress is {{ progress_rate }}!</p>
+                <button @click="progress_rate+=10">Increase Progress Rate by 10</button>
+                <button @click="progress_rate+=100">Increase Progress Rate by 100</button>
+            </div>
+        </progress-view>
+    </div>
+
+</div>
+</body>
+<script src="/js/14.js"></script
+</html>

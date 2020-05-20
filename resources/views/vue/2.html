@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="root">
+    <ol>
+        <li v-for="name in names">{{name}}</li>
+    </ol>
+    <input type="text" id="new_item" placeholder="Add new item here" @select="addName" v-model="new_name">
+    <button id="add" @click="addName">Add</button>
+    <!--    <button id="add" v-on:click="addName">Add</button>-->
+</div>
+
+</body>
+
+<script>
+    var app = new Vue({
+        el: '#root',
+        data: {
+            'new_name' : '',
+            'names' : ['Jane', "cen", 'Amal', "Jacob"]
+        },
+        methods : {
+            addName() {
+                this.names.push(this.new_name);
+                this.new_name = '';
+            }
+        }
+    });
+</script>
+
+</html>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+   protected $fillable=['project_name','project_desc'];
 
     public function user(){
         //user belong to the project

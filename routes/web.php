@@ -241,5 +241,60 @@ Route::get('/roles_and_abilities/view', 'RolesAbilitiesController@show')
 
 // 1. POST /articles/subscriptions
 
+//-----Learning Vue.js -------------------------//
+Route::get('/vue/1',function(){
+    return view('vue.1');
+});
 
+Route::get('/vue/2',function(){
+    return view('vue.2');
+});
 
+Route::get('/vue/3',function(){
+    return view('vue.3');
+});
+
+Route::get('/vue/4',function(){
+    return view('vue.4');
+});
+Route::get('/vue/5',function(){
+    return view('vue.5');
+});
+Route::get('/vue/6',function(){
+    return view('vue.6');
+});
+
+Route::get('/vue/7',function(){
+    return view('vue.7');
+});
+Route::get('/vue/8',function(){
+    return view('vue.8');
+});
+Route::get('/vue/9',function(){
+    return view('vue.9');
+});
+Route::get('/vue/10',function(){
+    return view('vue.10');
+});
+Route::get('/vue/11',function(){
+    return view('vue.11');
+});
+Route::get('/vue/12',function(){
+    return view('vue.12');
+});
+Route::get('/vue/13',function(){
+    return view('vue.13');
+});
+Route::get('/vue/14',function(){
+    return view('vue.14');
+});
+Route::get('/vue/lara-vue',function(){
+    return view('vue.lara-vue');
+});
+
+Route::get('verses/', function (){
+    return ['Jesus Christ', 'I can do all Things', 'Through him'];
+});
+
+Route::get('projects/create/','ProjectsController@create')->name('vue.projects.create');
+Route::post('projects/','ProjectsController@store')->name('vue.projects.store');

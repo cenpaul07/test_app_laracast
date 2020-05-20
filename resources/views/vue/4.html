@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<div id="root">
+
+    <p>{{ reversed_message }}</p>
+
+    <h2>Completed Tasks</h2>
+    <ul>
+        <li v-for="task in completed_tasks" v-if="task.completed" >
+        {{task.desc}}
+            <input  type="checkbox" @click="toggle" >
+
+        </li>
+
+    </ul>
+
+    <h2>InComplete Tasks</h2>
+    <ul>
+        <li v-for="task in incomplete_tasks">
+            {{task.desc}}
+            <input  type="checkbox" @click="toggle">
+        </li>
+
+    </ul>
+
+
+</div>
+
+</body>
+
+<script>
+    var app = new Vue({
+        el: '#root',
+        data: {
+            message : 'Hello World',
+            tasks : [
+                { 'desc':'complete vue js','completed':false},
+                { 'desc':'complete php','completed':true},
+                { 'desc':'complete laravel','completed':true},
+                { 'desc':'complete webpack','completed':false},
+                { 'desc':'complete sql','completed':false},
+                { 'desc':'complete css','completed':false},
+                { 'desc':'complete html','completed':true},
+            ]
+        },
+
+        methods : {
+
+            toggle(){
+                alert(this.task.completed);
+            }
+
+        },
+
+        computed :{
+            reversed_message(){
+               return  this.message.split('').reverse().join('');
+            },
+
+            incomplete_tasks(){
+                return this.tasks.filter(task => (task.completed===false)); //ES6 Syntax
+                // this.tasks.filter(
+                //     function (task) {
+                //         return ! task.completed;
+                //     }
+                // );
+            },
+
+            completed_tasks() {
+                return this.tasks.filter(task => (task.completed === true));
+            }
+        }
+    });
+</script>
+
+</html>

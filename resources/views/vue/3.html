@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+
+        .green{
+            background-color: green;
+        }
+        .large{
+            font-size: 25px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div id="root">
+   <button :title="title" @click='action' v-text>{{button_text}}</button>
+    <!-- v-bind:title is same as :title   -->
+    <!-- @click='action' is same v-on:click='action'   -->
+    <button :disabled="disabled" :style="{ 'background-color': backgroundcolor}" :class="class_name" @click="state_change">{{button_state}}</button>
+    <input type="text" v-model="backgroundcolor">
+    <input type="text" v-model="disabled">
+</div>
+
+</body>
+
+<script>
+    var app = new Vue({
+        el: '#root',
+        data: {
+            'title':'Awesome',
+            'button_text':'Awesome',
+            'button_state':'active',
+            'backgroundcolor':'red',
+            'disabled':'false'
+        },
+        methods : {
+            action(){
+                this.title = 'Cool';
+            },
+
+            state_change(){
+                this.button_state='disabled';
+                this.class_name = this.class_name.concat(' large');
+            }
+        }
+    });
+</script>
+
+</html>
